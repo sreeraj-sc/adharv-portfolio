@@ -55,8 +55,18 @@
     <section class="home" id="home">
 
         <div class="content">
-            <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.3/build/spline-viewer.js"></script>
-<spline-viewer url="https://prod.spline.design/RbLHpGbKbmJC3Zyo/scene.splinecode"></spline-viewer>
+            import Spline from '@splinetool/react-spline/next';
+
+export default function Home() {
+  return (
+    <main>
+      <Spline
+        scene="https://prod.spline.design/RbLHpGbKbmJC3Zyo/scene.splinecode" 
+      />
+    </main>
+  );
+}
+
           
             <a href="ADCV.pdf" class="btn">download CV</a>
         </div>
