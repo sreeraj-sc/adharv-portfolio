@@ -726,3 +726,14 @@ h3.experience__company {
   color: var(--light-color);
 }
 
+aa
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+::selection {
+  background: var(--green);
+  color: white;
+}
