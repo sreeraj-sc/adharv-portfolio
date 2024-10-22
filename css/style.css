@@ -726,17 +726,3 @@ h3.experience__company {
   color: var(--light-color);
 }
 
-aae
-
-.boxes {
-    perspective: 1000px; /* Enables 3D space */
-}
-
-.box {
-    transform: rotateY(15deg);
-    transition: transform 0.5s;
-}
-
-.box:hover {
-    transform: rotateY(0deg);
-}
