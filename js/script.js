@@ -1,6 +1,8 @@
 let menu = document.querySelector("#menu-btn");
 let header = document.querySelector(".header");
+let themeToggler = document.querySelector("#theme-toggler");
 
+// Toggle menu functionality
 menu.onclick = () => {
   menu.classList.toggle("fa-times");
   header.classList.toggle("active");
@@ -11,21 +13,16 @@ window.onscroll = () => {
   header.classList.remove("active");
 };
 
-let themeToggler = document.querySelector("#theme-toggler");
-
-// Add the missing select function
-
+// Theme toggle functionality
 themeToggler.onclick = () => {
   themeToggler.classList.toggle("fa-sun");
-  if (themeToggler.classList.contains("fa-sun")) {
-    document.body.classList.remove("active");
-  } else {
-    document.body.classList.add("active");
-  }
+  document.body.classList.toggle("active");
 };
 
 console.log("loaded");
-const typed = document.querySelector(".typed"); // Replace select with document.querySelector
+
+// Typing animation
+const typed = document.querySelector(".typed");
 if (typed) {
   let typed_strings = typed.getAttribute("data-typed-items");
   typed_strings = typed_strings.split(",");
@@ -38,10 +35,7 @@ if (typed) {
   });
 }
 
-window.onload = () => {
-  document.body.classList.add("active");
-};
-
+// Function to fetch Medium blogs
 async function fetchMediumBlogs() {
   const mediumFeedUrl =
     "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@adharvkt";
@@ -64,17 +58,17 @@ async function fetchMediumBlogs() {
         const imageUrl = imageMatch ? imageMatch[1] : "";
 
         blogCard.innerHTML = `
-                  <i class="fas fa-newspaper"></i> 
-                  ${
-                    imageUrl
-                      ? `<img src="${imageUrl}" alt="${post.title}" style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">`
-                      : ""
-                  }
-                  <h3>${post.title}</h3>
-                  <p>${post.content
-                    .replace(/(<([^>]+)>)/gi, "")
-                    .substring(0, 300)}...</p> 
-              `; // Remove HTML tags and show first 300 characters
+          <i class="fas fa-newspaper"></i> 
+          ${
+            imageUrl
+              ? `<img src="${imageUrl}" alt="${post.title}" style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">`
+              : ""
+          }
+          <h3>${post.title}</h3>
+          <p>${post.content
+            .replace(/(<([^>]+)>)/gi, "")
+            .substring(0, 300)}...</p>
+        `;
 
         blogContainer.appendChild(blogCard);
       });
@@ -89,7 +83,8 @@ async function fetchMediumBlogs() {
   }
 }
 
-// Call the function when the page loads
+// ✅ Combine both functions inside a single `window.onload`
 window.onload = () => {
-  fetchMediumBlogs();
+  document.body.classList.add("active"); // Ensures the theme toggler works on first click
+  fetchMediumBlogs(); // Fetch blog posts on page load
 };
