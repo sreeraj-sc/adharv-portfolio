@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
 
 :root {
+  --green: #2cd626;
   --green: #2CD626;
   --black: #000000;
   --light-color: #777;
@@ -149,6 +150,34 @@ section.education {
   font-size: 2.5rem;
 }
 
+.thm-badge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  background: transparent;
+}
+
+.thm-badge {
+  background: transparent !important;
+  border: none !important;
+  outline: none;
+  display: block;
+  width: 350px;
+}
+
+.blog-section h2,
+.blog-section p,
+.blog-section .btn {
+  color: var(--black);
+}
+
+body.active .blog-section h2,
+body.active .blog-section p,
+body.active .blog-section .btn {
+  color: var(--light-color);
+}
+
 .header .user p {
   color: white;
   font-size: 1.5rem;
@@ -217,6 +246,92 @@ section.education {
   color: var(--green);
   box-shadow: var(--box-shadow-inset);
 }
+
+.blog-section .box-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(22rem, 1fr)
+  ); /* Smaller width */
+  gap: 1.5rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.blog-section .box {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  background: var(--bg-color);
+  transition: transform 0.3s ease-in-out;
+  min-height: 250px; /* Reduce card height */
+  max-width: 22rem; /* Reduce card width */
+  margin: auto;
+}
+
+.blog-section .box:hover {
+  transform: scale(1.05);
+}
+
+.blog-section .box i {
+  font-size: 3rem; /* Adjust icon size */
+  color: var(--green);
+  margin-bottom: 1rem;
+}
+
+.blog-section .box h3 {
+  font-size: 1.6rem; /* Adjust title size */
+  color: var(--black);
+  margin-bottom: 0.8rem;
+}
+
+.blog-section .box p {
+  font-size: 1.2rem; /* Adjust text size */
+  color: var(--light-color);
+  line-height: 1.5;
+}
+
+.blog-section .box a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--green);
+  color: var(--black);
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.blog-section .box a:hover {
+  background: var(--black);
+  color: var(--green);
+}
+
+/* Add these styles to your existing CSS */
+.services .box-container .box {
+  min-height: 350px; /* Fixed card height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Even spacing */
+}
+
+.services .box-container .box i {
+  font-size: 5rem; /* Increase icon size */
+  margin-bottom: 2rem; /* Add spacing below icons */
+}
+
+.services .box-container .box h3 {
+  font-size: 2.2rem; /* Standardize heading size */
+  margin-bottom: 1.5rem;
+}
+
+.services .box-container .box p {
+  font-size: 1.5rem; /* Standardize text size */
+  line-height: 1.6;
+  flex-grow: 1; /* Ensure text fills available space */
+}
+
 
 .home {
   display: flex;
