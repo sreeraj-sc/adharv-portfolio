@@ -96,15 +96,16 @@ section.education {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh; /* Adjust height as needed */
+  height: 50vh;
+  background: transparent;
 }
 
 .thm-badge {
-  width: 350px; /* Adjust the size as needed */
-  height: 150px;
-  border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  background: transparent !important;
+  border: none !important;
+  outline: none;
+  display: block;
+  width: 350px;
 }
 
 .blog-section h2,
