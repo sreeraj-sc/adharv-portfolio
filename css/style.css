@@ -92,6 +92,21 @@ section.education {
   z-index: -1;
 }
 
+.thm-badge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Adjust height as needed */
+}
+
+.thm-badge {
+  width: 350px; /* Adjust the size as needed */
+  height: 150px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
 .blog-section h2,
 .blog-section p,
 .blog-section .btn {
