@@ -97,3 +97,32 @@ window.onload = () => {
 };
 
 console.log("JavaScript loaded successfully.");
+// Function to display blogs
+function displayBlogs(posts) {
+  blogContainer.innerHTML = ""; // Clear previous content
+
+  posts.forEach((post) => {
+    const blogCard = document.createElement("div");
+    blogCard.classList.add("box"); // Flash card styling like services section
+
+    // Extract image from content
+    const imageMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
+    const imageUrl = imageMatch ? imageMatch[1] : "";
+
+    blogCard.innerHTML = `
+      <i class="fas fa-newspaper"></i>
+      ${
+        imageUrl
+          ? `<img src="${imageUrl}" alt="${post.title}" style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">`
+          : ""
+      }
+      <h3>${post.title}</h3>
+      <p>${post.content.replace(/(<([^>]+)>)/gi, "").substring(0, 300)}...</p>
+      <a href="${
+        post.link
+      }" class="btn">Read More</a> <!-- Added Read More button -->
+    `;
+
+    blogContainer.appendChild(blogCard);
+  });
+}
