@@ -1,33 +1,33 @@
-let menu = document.querySelector("#menu-btn");
-let header = document.querySelector(".header");
-let themeToggler = document.querySelector("#theme-toggler");
+// Selectors
+const menu = document.querySelector("#menu-btn");
+const header = document.querySelector(".header");
+const themeToggler = document.querySelector("#theme-toggler");
+const blogContainer = document.getElementById("medium-posts");
 
 // Toggle menu functionality
-menu.onclick = () => {
+menu.addEventListener("click", () => {
   menu.classList.toggle("fa-times");
   header.classList.toggle("active");
-};
+});
 
-window.onscroll = () => {
+// Close menu on scroll
+window.addEventListener("scroll", () => {
   menu.classList.remove("fa-times");
   header.classList.remove("active");
-};
+});
 
 // Theme toggle functionality
-themeToggler.onclick = () => {
+themeToggler.addEventListener("click", () => {
   themeToggler.classList.toggle("fa-sun");
   document.body.classList.toggle("active");
-};
-
-console.log("loaded");
+});
 
 // Typing animation
-const typed = document.querySelector(".typed");
-if (typed) {
-  let typed_strings = typed.getAttribute("data-typed-items");
-  typed_strings = typed_strings.split(",");
+const typedElement = document.querySelector(".typed");
+if (typedElement) {
+  const typedStrings = typedElement.getAttribute("data-typed-items").split(",");
   new Typed(".typed", {
-    strings: typed_strings,
+    strings: typedStrings,
     loop: true,
     typeSpeed: 100,
     backSpeed: 50,
@@ -39,52 +39,61 @@ if (typed) {
 async function fetchMediumBlogs() {
   const mediumFeedUrl =
     "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@adharvkt";
-  const blogContainer = document.getElementById("medium-posts");
 
   try {
     const response = await fetch(mediumFeedUrl);
     const data = await response.json();
 
     if (data.status === "ok") {
-      const posts = data.items;
-      blogContainer.innerHTML = ""; // Clear previous content
-
-      posts.forEach((post) => {
-        const blogCard = document.createElement("div");
-        blogCard.classList.add("box"); // Flash card styling like services section
-
-        // Extract image from content
-        const imageMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
-        const imageUrl = imageMatch ? imageMatch[1] : "";
-
-        blogCard.innerHTML = `
-          <i class="fas fa-newspaper"></i> 
-          ${
-            imageUrl
-              ? `<img src="${imageUrl}" alt="${post.title}" style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">`
-              : ""
-          }
-          <h3>${post.title}</h3>
-          <p>${post.content
-            .replace(/(<([^>]+)>)/gi, "")
-            .substring(0, 300)}...</p>
-        `;
-
-        blogContainer.appendChild(blogCard);
-      });
+      displayBlogs(data.items);
     } else {
-      blogContainer.innerHTML =
-        "<p>Failed to load blogs. Please try again later.</p>";
+      displayError("Failed to load blogs. Please try again later.");
     }
   } catch (error) {
     console.error("Error fetching Medium blogs:", error);
-    blogContainer.innerHTML =
-      "<p>Failed to load blogs. Please try again later.</p>";
+    displayError("Failed to load blogs. Please try again later.");
   }
 }
 
-// ✅ Combine both functions inside a single `window.onload`
+// Function to display blogs
+function displayBlogs(posts) {
+  blogContainer.innerHTML = ""; // Clear previous content
+
+  posts.forEach((post) => {
+    const blogCard = document.createElement("div");
+    blogCard.classList.add("box"); // Flash card styling like services section
+
+    // Extract image from content
+    const imageMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
+    const imageUrl = imageMatch ? imageMatch[1] : "";
+
+    blogCard.innerHTML = `
+      <i class="fas fa-newspaper"></i>
+      ${
+        imageUrl
+          ? `<img src="${imageUrl}" alt="${post.title}" style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">`
+          : ""
+      }
+      <h3>${post.title}</h3>
+      <p>${post.content.replace(/(<([^>]+)>)/gi, "").substring(0, 300)}...</p>
+      <a href="${
+        post.link
+      }" class="btn">Read More</a> <!-- Added Read More button -->
+    `;
+
+    blogContainer.appendChild(blogCard);
+  });
+}
+
+// Function to display error message
+function displayError(message) {
+  blogContainer.innerHTML = `<p>${message}</p>`;
+}
+
+// Combine both functions inside a single `window.onload`
 window.onload = () => {
   document.body.classList.add("active"); // Ensures the theme toggler works on first click
   fetchMediumBlogs(); // Fetch blog posts on page load
 };
+
+console.log("JavaScript loaded successfully.");
